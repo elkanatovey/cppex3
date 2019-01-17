@@ -13,7 +13,6 @@ template <class T>
 class Matrix{
 
     std::vector<T> _matrixContainer;
-//    using _matrixContainer = std::vector<T>;
     unsigned int _rows;
     unsigned int _columns;
 
@@ -45,6 +44,9 @@ public:
 
     Matrix trans() const;
 
+    template <class Complex>
+    Matrix trans() const;
+
     Matrix& operator+=(const Matrix &other);
 
     Matrix& operator-=(const Matrix &other);
@@ -61,9 +63,20 @@ public:
 
     int cols(){ return _columns;};
 
-    typename std::vector<T>::const_iterator it;
+    typedef  typename std::vector<T>::const_iterator const_iterator;
 
-    typedef cons =
+    const_iterator cbegin()const
+    {
+        return _matrixContainer.cbegin();
+    }
+
+
+    const_iterator cend()const
+    {
+        return _matrixContainer.cend();
+    };
+
+//    typedef const_iterator = typename _matrixContainer::const_iterator
 //    using const_iterator = typename _matrixContainer::const_iterator;
 //    const_iterator cbegin() const
 //    {
@@ -261,11 +274,6 @@ Matrix<T>& Matrix<T>::operator-=(const Matrix &other)
 {
     this = this - other;
     return *this;
-}
-
-template<class T>
-T *Matrix<T>::iterator() {
-    return _matrixContainer;
 }
 
 
